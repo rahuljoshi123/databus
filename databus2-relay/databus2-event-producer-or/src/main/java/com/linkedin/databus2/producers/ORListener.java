@@ -42,7 +42,7 @@ import com.google.code.or.common.glossary.Row;
 import com.google.code.or.common.glossary.column.BitColumn;
 import com.google.code.or.common.glossary.column.BlobColumn;
 import com.google.code.or.common.glossary.column.DateColumn;
-import com.google.code.or.common.glossary.column.Datetime2Column;
+
 import com.google.code.or.common.glossary.column.DatetimeColumn;
 import com.google.code.or.common.glossary.column.DecimalColumn;
 import com.google.code.or.common.glossary.column.DoubleColumn;
@@ -666,12 +666,6 @@ class ORListener extends DatabusThreadBase implements BinlogEventListener
     else if (s instanceof DatetimeColumn)
     {
       DatetimeColumn tsc = (DatetimeColumn) s;
-      Long t = tsc.getValue().getTime();
-      return t;
-    }
-    else if (s instanceof Datetime2Column)
-    {
-      Datetime2Column tsc = (Datetime2Column) s;
       Long t = tsc.getValue().getTime();
       return t;
     }
