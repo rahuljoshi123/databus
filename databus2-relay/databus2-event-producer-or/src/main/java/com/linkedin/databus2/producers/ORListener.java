@@ -568,8 +568,10 @@ class ORListener extends DatabusThreadBase implements BinlogEventListener
     else if (s instanceof DecimalColumn)
     {
       DecimalColumn dc = (DecimalColumn) s;
-      Object val = Double.valueOf(dc.getValue().doubleValue());
-      return val;
+      _log.info("dc Value is :" + dc.getValue());
+      String s1 = dc.getValue().toString(); // Convert to string for preserving precision
+      _log.info("Str : " + s1);
+      return s1;
     }
     else if (s instanceof DoubleColumn)
     {
@@ -612,12 +614,8 @@ class ORListener extends DatabusThreadBase implements BinlogEventListener
     else if (s instanceof LongLongColumn)
     {
       LongLongColumn llc = (LongLongColumn) s;
-      BigInteger b = new BigInteger(llc.getValue()+"");
-      if (b.compareTo(BigInteger.ZERO) < 0 && SchemaHelper.getMetaField(avroField, "dbFieldType").contains("UNSIGNED"))
-      {
-        b = b.add(ORListener.BIGINT_MAX_VALUE);
-      }
-      return b;
+      Long l = llc.getValue();
+      return l;
     }
     else if (s instanceof NullColumn)
     {
